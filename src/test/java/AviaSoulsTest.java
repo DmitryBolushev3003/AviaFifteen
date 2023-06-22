@@ -52,6 +52,28 @@ public class AviaSoulsTest {
     }
 
     @Test
+    public void aviaSoulsSortNull() {
+
+        AviaSouls aviaSouls = new AviaSouls();
+
+
+        Ticket ticket1 = new Ticket("St.Petersburg", "Paris", 50_000, 3, 15);
+        Ticket ticket2 = new Ticket("St.Petersburg", "Paris", 45_000, 15, 3);
+        Ticket ticket3 = new Ticket("St.Petersburg", "Paris", 70_000, 9, 21);
+        Ticket ticket4 = new Ticket("Perm'", "Bali", 3_000, 12, 17);
+        Ticket ticket5 = new Ticket("Bali", "EKB", 5_000, 3, 15);
+
+        aviaSouls.add(ticket1);
+        aviaSouls.add(ticket2);
+        aviaSouls.add(ticket3);
+        aviaSouls.add(ticket4);
+        aviaSouls.add(ticket5);
+        Ticket[] expected = {};
+        Ticket[] actual = aviaSouls.search("Perm'", "Paris");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
     public void aviaSoulsSortComparatorThree() {
 
         AviaSouls aviaSouls = new AviaSouls();
@@ -94,6 +116,29 @@ public class AviaSoulsTest {
         Comparator<Ticket> comparator = new TicketTimeComparator();
         Ticket[] expected = {ticket5};
         Ticket[] actual = aviaSouls.search("Bali", "EKB");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void aviaSoulsSortComparatorNull() {
+
+        AviaSouls aviaSouls = new AviaSouls();
+
+
+        Ticket ticket1 = new Ticket("St.Petersburg", "Paris", 50_000, 3, 13);
+        Ticket ticket2 = new Ticket("St.Petersburg", "Paris", 45_000, 15, 21);
+        Ticket ticket3 = new Ticket("St.Petersburg", "Paris", 70_000, 9, 21);
+        Ticket ticket4 = new Ticket("Perm'", "Bali", 3_000, 12, 17);
+        Ticket ticket5 = new Ticket("Bali", "EKB", 5_000, 3, 15);
+
+        aviaSouls.add(ticket1);
+        aviaSouls.add(ticket2);
+        aviaSouls.add(ticket3);
+        aviaSouls.add(ticket4);
+        aviaSouls.add(ticket5);
+        Comparator<Ticket> comparator = new TicketTimeComparator();
+        Ticket[] expected = {};
+        Ticket[] actual = aviaSouls.search("Bali", "St.Petersburg");
         Assertions.assertArrayEquals(expected, actual);
     }
 
